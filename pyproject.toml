@@ -1,0 +1,24 @@
+[project]
+name = "tools"
+version = "0.1.0"
+description = "My personal toolbox with all kinds of helper scripts"
+authors = [
+    {name = "Jakob Schluse", email = "jakob@schluse.com"},
+]
+dependencies = [
+    "click",
+]
+requires-python = ">=3.11"
+readme = "README.md"
+license = {text = "MIT"}
+
+[project.scripts]
+tools = "tools:main"
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
