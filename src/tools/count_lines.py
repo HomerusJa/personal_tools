@@ -2,9 +2,7 @@ from pathlib import Path
 
 import click
 
-
-def should_exclude(path: Path, exclude_dirs: list[str]) -> bool:
-    return any(excluded in path.parts for excluded in exclude_dirs)
+from tools.shared.path_utils import should_exclude
 
 
 def count_lines(file_path: Path) -> int:

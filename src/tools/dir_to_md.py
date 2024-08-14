@@ -2,16 +2,14 @@ from pathlib import Path
 
 import click
 
+from tools.shared.path_utils import should_exclude
+
 
 def read_file(file_path: Path) -> str:
     try:
         return file_path.read_text(encoding="utf-8")
     except Exception as e:
         return f"Error reading file: {str(e)}"
-
-
-def should_exclude(path: Path, exclude_dirs: list[str]) -> bool:
-    return any(excluded in path.parts for excluded in exclude_dirs)
 
 
 @click.command()
