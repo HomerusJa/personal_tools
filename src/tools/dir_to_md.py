@@ -3,27 +3,32 @@ from pathlib import Path
 import click
 
 
-def read_file(file_path):
+def read_file(file_path: Path) -> str:
     try:
         return file_path.read_text(encoding="utf-8")
     except Exception as e:
         return f"Error reading file: {str(e)}"
 
 
-def should_exclude(path, exclude_dirs):
+def should_exclude(path: Path, exclude_dirs: list[str]) -> bool:
     return any(excluded in path.parts for excluded in exclude_dirs)
 
 
 @click.command()
-@click.argument("input_dir")
-@click.argument("output_file")
+@click.argument(
+    "input_dir",
+    type=click.Path(exists=True, path_type=Path, file_okay=False),
+)
+@click.argument(
+    "output_file",
+    type=click.Path(dir_okay=False, path_type=Path),
+)
 @click.option(
     "--exclude", "-e", multiple=True, help="List of directory names to exclude"
 )
-def cli(input_dir, output_file, exclude):
+def cli(input_dir: Path, output_file: Path, exclude: list[str]):
     """Converts a directory of files to a markdown file."""
     # TODO: Respect the .gitignore file
-    input_dir = Path(input_dir)
     with Path(output_file).open("w", encoding="utf-8") as out_file:
         for file_path in input_dir.rglob("*"):
             if file_path.is_file() and not should_exclude(file_path, exclude):

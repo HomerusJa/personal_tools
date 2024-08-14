@@ -24,7 +24,6 @@ def main():
                 __import__(f"tools.{file_path.stem}", fromlist=["cli"]), "cli"
             )
             cli.add_command(command, name=file_path.stem)
-            print(f"Added command: {file_path.stem}")
 
     cli()
 

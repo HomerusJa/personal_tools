@@ -25,8 +25,9 @@ If you want to add a new tool, just add a new file with the same structure as `t
 Remember to reinstall the tools everytime you add a new one using the following commands:
 
 ```shell
+cd personal_tools
 pipx uninstall tools
-
-# make sure you are in the root folder of the project
 pipx install .
 ```
+
+Note that `pipx reinstall` is not working here due to the dynamic imports to include all commands.
